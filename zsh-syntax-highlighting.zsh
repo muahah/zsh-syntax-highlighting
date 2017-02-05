@@ -338,9 +338,9 @@ _zsh_highlight_load_highlighters()
 
   # Load highlighters from highlighters directory and check they define required functions.
   local highlighter highlighter_dir
-  set TMP_PATH=$(pwd)
+  TMP_PATH=$(pwd)
   cd $1
-  for highlighter_dir ($1/*/); do
+  for highlighter_dir (*/); do
     highlighter="${highlighter_dir:t}"
     [[ -f "$highlighter_dir${highlighter}-highlighter.zsh" ]] &&
       . "$highlighter_dir${highlighter}-highlighter.zsh"
