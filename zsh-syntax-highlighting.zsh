@@ -338,6 +338,8 @@ _zsh_highlight_load_highlighters()
 
   # Load highlighters from highlighters directory and check they define required functions.
   local highlighter highlighter_dir
+  set TMP_PATH=$(pwd)
+  cd $1
   for highlighter_dir ($1/*/); do
     highlighter="${highlighter_dir:t}"
     [[ -f "$highlighter_dir${highlighter}-highlighter.zsh" ]] &&
@@ -361,6 +363,7 @@ _zsh_highlight_load_highlighters()
         print -r -- >&2 "zsh-syntax-highlighting: ${(qq)highlighter} highlighter should define both required functions '_zsh_highlight_highlighter_${highlighter}_paint' and '_zsh_highlight_highlighter_${highlighter}_predicate' in ${(qq):-"$highlighter_dir${highlighter}-highlighter.zsh"}."
     fi
   done
+  cd $TMP_PATH
 }
 
 
